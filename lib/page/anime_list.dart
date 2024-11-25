@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:jikan/model/Anime.dart';
 import 'package:jikan/service/Anime_Service.dart';
+import 'detail_page.dart';
 
 class AnimeListPage extends StatefulWidget {
   @override
@@ -63,6 +64,14 @@ class _AnimeListPageState extends State<AnimeListPage> {
                       Text('Score: ${anime.score}'),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnimeDetailPage(malId: anime.malId),
+                      ),
+                    );
+                  },
                 ),
               );
             },
