@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jikan/model/Anime.dart';
 import 'package:jikan/model/Character.dart'; // Import Character model
-// import 'package:jikan/model/Staffs.dart'; // Import Character model
+import 'package:jikan/model/Staffs.dart'; // Import Character model
 import 'package:jikan/service/Anime_Service.dart';
 
 class AnimeDetailPage extends StatefulWidget {
@@ -22,6 +22,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
     futureCombined = Future.wait([
       AnimeService.fetchAnimeDetails(widget.malId),
       AnimeService.fetchAnimeDetailsCharacter(widget.malId),
+      AnimeService.fetchAnimeDetailsStaffs(widget.malId),
     ]);
   }
 
@@ -44,7 +45,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
 
           final anime = snapshot.data![0] as Anime;
           final characters = snapshot.data![1] as List<Character>;
-          // final staffs = snapshot.data![2] as List<Staffs>;
+          final staffs = snapshot.data![2] as List<Staffs>;
 
           return SingleChildScrollView(
             child: Column(
@@ -138,6 +139,57 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                   ),
                                   Text(
                                     character.role,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Staffs',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              staffs.take(6).length, // Menggunakan staffs
+                          itemBuilder: (context, index) {
+                            final staff = staffs[index]; // Menggunakan staffs
+                            return Container(
+                              width: 120,
+                              margin: EdgeInsets.only(right: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 60,
+                                    backgroundImage:
+                                        NetworkImage(staff.imageUrl),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    staff.name,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  Text(
+                                    staff.positions.join(
+                                        ", "), // Mengkonversi List<String> menjadi String dengan pemisah koma
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 10,

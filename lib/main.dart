@@ -1,6 +1,7 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:jikan/page/anime_list.dart';
+import 'package:jikan/page/search_page.dart';
 
 void main() {
   runApp(AnimeApp());
