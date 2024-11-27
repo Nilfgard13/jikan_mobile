@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jikan/model/Anime.dart';
 import 'package:jikan/model/Character.dart'; // Import Character model
 import 'package:jikan/model/Staffs.dart'; // Import Character model
+import 'package:jikan/model/Episode.dart'; // Import Character model
 import 'package:jikan/service/Anime_Service.dart';
+import 'detail_episode.dart';
 
 class AnimeDetailPage extends StatefulWidget {
   final int malId;
@@ -23,6 +25,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
       AnimeService.fetchAnimeDetails(widget.malId),
       AnimeService.fetchAnimeDetailsCharacter(widget.malId),
       AnimeService.fetchAnimeDetailsStaffs(widget.malId),
+      AnimeService.fetchAnimeEpisodes(widget.malId),
     ]);
   }
 
@@ -46,6 +49,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
           final anime = snapshot.data![0] as Anime;
           final characters = snapshot.data![1] as List<Character>;
           final staffs = snapshot.data![2] as List<Staffs>;
+          final episodes = snapshot.data![3] as List<Episode>;
 
           return SingleChildScrollView(
             child: Column(
@@ -201,6 +205,121 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                             );
                           },
                         ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Episodes',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: episodes.length,
+                        itemBuilder: (context, index) {
+                          final episode = episodes[index];
+                          return Card(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 0),
+                            child: ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EpisodeDetailPage(
+                                      animeId: anime
+                                          .malId, // Pastikan episode memiliki animeId
+                                      episodeId: episode
+                                          .malId, // Menggunakan malId sebagai episodeId
+                                    ),
+                                  ),
+                                );
+                              },
+                              title: Text(
+                                'Episode ${episode.malId}: ${episode.title}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (episode.titleJapanese != null &&
+                                      episode.titleJapanese!.isNotEmpty)
+                                    Text(
+                                      episode.titleJapanese!,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  if (episode.titleRomanji != null &&
+                                      episode.titleRomanji!.isNotEmpty)
+                                    Text(
+                                      episode.titleRomanji!,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  Text(
+                                    'Aired: ${episode.aired}',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  Row(
+                                    children: [
+                                      if (episode.score > 0)
+                                        Text(
+                                          'Score: ${episode.score.toStringAsFixed(2)}',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      SizedBox(width: 10),
+                                      if (episode.filler)
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 6, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: Text(
+                                            'Filler',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ),
+                                      if (episode.recap)
+                                        Container(
+                                          margin: EdgeInsets.only(left: 6),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 6, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: Text(
+                                            'Recap',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

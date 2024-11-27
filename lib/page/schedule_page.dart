@@ -60,7 +60,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Anime Schedule'),
+        title: Text('Filter List'),
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),

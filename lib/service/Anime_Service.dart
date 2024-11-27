@@ -5,6 +5,8 @@ import 'package:jikan/model/Anime.dart';
 import 'package:jikan/model/Character.dart';
 import 'package:jikan/model/Staffs.dart';
 import 'package:jikan/model/Schedule.dart';
+import 'package:jikan/model/Episode.dart';
+import 'package:jikan/model/Episode_detail.dart';
 
 class AnimeService {
   static Future<List<Anime>> fetchAnimeList() async {
@@ -89,6 +91,84 @@ class AnimeService {
       }
     } catch (e) {
       throw Exception('Error fetching anime schedule: $e');
+    }
+  }
+
+  static Future<List<Episode>> fetchAnimeEpisodes(int malId) async {
+    try {
+      // Add delay to respect API rate limiting
+      await Future.delayed(Duration(milliseconds: 500));
+
+      final response = await http.get(
+        Uri.parse('https://api.jikan.moe/v4/anime/$malId/episodes'),
+        headers: {
+          'Accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+
+        // Check if 'data' exists and is a List
+        if (jsonResponse.containsKey('data') && jsonResponse['data'] is List) {
+          final List<dynamic> episodeList = jsonResponse['data'];
+          return episodeList.map((json) => Episode.fromJson(json)).toList();
+        } else {
+          print('Invalid response format: ${response.body}');
+          return [];
+        }
+      } else if (response.statusCode == 429) {
+        // Handle rate limiting
+        print('Rate limited. Waiting before retrying...');
+        await Future.delayed(Duration(seconds: 2));
+        return fetchAnimeEpisodes(malId); // Retry the request
+      } else {
+        print('Failed to load episodes. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to load episodes');
+      }
+    } catch (e) {
+      print('Error fetching episodes: $e');
+      throw Exception('Error fetching episodes: $e');
+    }
+  }
+
+  static Future<EpisodeDetail> fetchEpisodeDetail(
+      int animeId, int episodeId) async {
+    try {
+      await Future.delayed(
+          Duration(milliseconds: 500)); // Respect rate limiting
+
+      final response = await http.get(
+        Uri.parse(
+            'https://api.jikan.moe/v4/anime/$animeId/episodes/$episodeId'),
+        headers: {
+          'Accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+
+        if (jsonResponse.containsKey('data')) {
+          return EpisodeDetail.fromJson(jsonResponse['data']);
+        } else {
+          print('Invalid response format: ${response.body}');
+          throw Exception('Invalid response format');
+        }
+      } else if (response.statusCode == 429) {
+        print('Rate limited. Waiting before retrying...');
+        await Future.delayed(Duration(seconds: 2));
+        return fetchEpisodeDetail(animeId, episodeId);
+      } else {
+        print(
+            'Failed to load episode detail. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to load episode detail');
+      }
+    } catch (e) {
+      print('Error fetching episode detail: $e');
+      throw Exception('Error fetching episode detail: $e');
     }
   }
 }

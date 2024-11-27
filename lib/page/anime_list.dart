@@ -168,7 +168,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
         // Favorites page
         Scaffold(
           appBar: AppBar(
-            title: Text('Favorites'),
+            title: Text('Anime Schedules'),
           ),
           body: Center(
             child: ScheduleScreen(),
@@ -177,7 +177,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
       ],
       actionBarView: Scaffold(
         appBar: AppBar(
-          title: Text('Add Anime'),
+          title: Text('Search Anime'),
         ),
         body: Center(
           child: SearchPage(),
