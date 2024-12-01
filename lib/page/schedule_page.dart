@@ -83,9 +83,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             _days[index].toUpperCase(),
                             style: TextStyle(
                               color: _selectedIndex == index
-                                  ? Colors.white // Text color when selected
-                                  : Colors.grey[
-                                      400], // Text color when not selected
+                                  ? Colors.white
+                                  : Colors.grey[400],
                               fontWeight: _selectedIndex == index
                                   ? FontWeight.bold
                                   : FontWeight.normal,
@@ -97,10 +96,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             });
                             _fetchSchedule(_days[index]);
                           },
-                          selectedColor:
-                              Colors.blue, // Change to blue when selected
-                          backgroundColor:
-                              Colors.grey[700], // Gray when not selected
+                          selectedColor: Colors.blue,
+                          backgroundColor: Colors.grey[700],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -112,8 +109,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 },
               ),
             ),
-
-            // Content Area
             Expanded(
               child: isLoading
                   ? Center(
@@ -268,7 +263,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ),
                       ),
                     ),
-                    // Anime Details
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.all(16),

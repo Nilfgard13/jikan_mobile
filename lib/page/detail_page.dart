@@ -17,15 +17,11 @@ class AnimeDetailPage extends StatefulWidget {
 
 class _AnimeDetailPageState extends State<AnimeDetailPage> {
   late Future<List<dynamic>> futureCombined;
-  // final mainBlue = Color(0xFF1A237E); // Deep Blue
-  // final secondaryBlue = Color(0xFF3949AB); // Lighter Blue
-  // final accentBlue = Color(0xFF42A5F5); // Light Blue
 
-  final mainBlue = Color(0xFF1565C0); // Deeper blue
-  final secondaryBlue = Color(0xFF2196F3); // Bright blue
-  final grayBackground =
-      const Color.fromARGB(255, 51, 51, 51); // Dark gray background
-  final lightGray = Color(0xFF424242); // Lighter gray for cards
+  final mainBlue = Color(0xFF1565C0);
+  final secondaryBlue = Color(0xFF2196F3);
+  final grayBackground = const Color.fromARGB(255, 51, 51, 51);
+  final lightGray = Color(0xFF424242);
 
   @override
   void initState() {
@@ -138,7 +134,6 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Info Card
                         Card(
                           elevation: 4,
                           child: Padding(
@@ -192,9 +187,12 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                   children: anime.genres
                                       .map((genre) => Chip(
                                             label: Text(genre),
-                                            backgroundColor: const Color.fromARGB(255, 70, 69, 69),
-                                            labelStyle:
-                                                TextStyle(color: const Color.fromARGB(255, 199, 199, 199)),
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 70, 69, 69),
+                                            labelStyle: TextStyle(
+                                                color: const Color.fromARGB(
+                                                    255, 199, 199, 199)),
                                           ))
                                       .toList(),
                                 ),
@@ -203,8 +201,6 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           ),
                         ),
                         SizedBox(height: 24),
-
-                        // Synopsis Section
                         _buildSectionTitle('Synopsis'),
                         Card(
                           child: Padding(
@@ -220,8 +216,6 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           ),
                         ),
                         SizedBox(height: 24),
-
-                        // Characters Section
                         _buildSectionTitle('Characters'),
                         SizedBox(height: 10),
                         SizedBox(
@@ -241,8 +235,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(
-                                            8.0), // Add padding around the image
+                                        padding: const EdgeInsets.all(8.0),
                                         child: CircleAvatar(
                                           radius: 50,
                                           backgroundImage:
@@ -283,8 +276,6 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           ),
                         ),
                         SizedBox(height: 24),
-
-                        // Staff Section
                         _buildSectionTitle('Staff'),
                         SizedBox(height: 10),
                         SizedBox(
@@ -296,26 +287,22 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                               final staff = staffs[index];
                               return Card(
                                 elevation: 4,
-                                margin: EdgeInsets.only(
-                                    right: 16, left: 16), // Added left margin
+                                margin: EdgeInsets.only(right: 16, left: 16),
                                 child: Container(
-                                  width: 150, // Slightly increased width
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 12), // Added overall padding
+                                  width: 150,
+                                  padding: EdgeInsets.symmetric(vertical: 12),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
-                                        radius: 55, // Slightly larger avatar
+                                        radius: 55,
                                         backgroundImage:
                                             NetworkImage(staff.imageUrl),
-                                        backgroundColor: Colors.grey[
-                                            200], // Added background color
+                                        backgroundColor: Colors.grey[200],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(
-                                            10.0), // Slightly increased padding
+                                        padding: const EdgeInsets.all(10.0),
                                         child: Column(
                                           children: [
                                             Text(
@@ -325,21 +312,18 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    15, // Slightly larger font
-                                                color: const Color.fromARGB(255, 255, 255, 255), // Added slight color variation
+                                                fontSize: 15,
+                                                color: const Color.fromARGB(
+                                                    255, 255, 255, 255),
                                               ),
                                             ),
-                                            SizedBox(
-                                                height: 6), // Adjusted spacing
+                                            SizedBox(height: 6),
                                             Text(
-                                              staff.positions.join(
-                                                  " • "), // Used • separator instead of comma
+                                              staff.positions.join(" • "),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontSize: 13,
-                                                color: Colors.grey[
-                                                    700], // Slightly darker grey
+                                                color: Colors.grey[700],
                                               ),
                                             ),
                                           ],
@@ -353,8 +337,6 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                           ),
                         ),
                         SizedBox(height: 24),
-
-                        // Episodes Section
                         _buildSectionTitle('Episodes'),
                         SizedBox(height: 10),
                         ExpansionTile(
@@ -362,7 +344,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                             children: [
                               Icon(
                                 Icons.play_circle_fill,
-                                color: Colors.blueAccent, // Ikon animasi
+                                color: Colors.blueAccent,
                                 size: 28,
                               ),
                               SizedBox(width: 10),
@@ -384,11 +366,12 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                               fontStyle: FontStyle.italic,
                             ),
                           ),
-                          backgroundColor: const Color.fromARGB(255, 33, 33, 33),
-                          collapsedBackgroundColor: const Color.fromARGB(255, 51, 51, 51),
+                          backgroundColor:
+                              const Color.fromARGB(255, 33, 33, 33),
+                          collapsedBackgroundColor:
+                              const Color.fromARGB(255, 51, 51, 51),
                           collapsedShape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(16), // Sudut melengkung
+                            borderRadius: BorderRadius.circular(16),
                             side: BorderSide(
                               color: Colors.grey[400]!,
                               width: 1,
@@ -401,9 +384,11 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                               width: 1.5,
                             ),
                           ),
-                          collapsedTextColor: const Color.fromARGB(255, 56, 56, 56),
+                          collapsedTextColor:
+                              const Color.fromARGB(255, 56, 56, 56),
                           textColor: Colors.blue,
-                          collapsedIconColor: const Color.fromARGB(255, 56, 56, 56),
+                          collapsedIconColor:
+                              const Color.fromARGB(255, 56, 56, 56),
                           iconColor: Colors.blue,
                           children: [
                             ListView.builder(
@@ -433,7 +418,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                       backgroundColor: Colors.blueAccent,
                                       child: Text(
                                         '${episode.malId}',
-                                        style: TextStyle(color: const Color.fromARGB(255, 101, 101, 101)),
+                                        style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 101, 101, 101)),
                                       ),
                                     ),
                                     title: Text(

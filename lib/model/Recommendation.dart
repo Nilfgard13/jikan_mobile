@@ -1,5 +1,3 @@
-// lib/model/AnimeRecommendation.dart
-
 class AnimeRecommendation {
   final String malId;
   final List<RecommendedAnime> entries;

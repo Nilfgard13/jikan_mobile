@@ -1,4 +1,3 @@
-// lib/models/anime.dart
 import 'Character.dart';
 import 'Staffs.dart';
 

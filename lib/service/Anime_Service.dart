@@ -97,7 +97,6 @@ class AnimeService {
 
   static Future<List<Episode>> fetchAnimeEpisodes(int malId) async {
     try {
-      // Add delay to respect API rate limiting
       await Future.delayed(Duration(milliseconds: 500));
 
       final response = await http.get(

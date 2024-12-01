@@ -181,7 +181,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Title
                                     Text(
                                       anime.title,
                                       maxLines: 2,
@@ -265,8 +264,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildRecommendationsList(),
-
-                // Header Section
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -279,8 +276,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                     ),
                   ),
                 ),
-
-                // Grid Section
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: SizedBox(
@@ -310,12 +305,10 @@ class _AnimeListPageState extends State<AnimeListPage> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: const Color(
-                                  0xFF424242), // Dark gray background
+                              color: const Color(0xFF424242),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: Colors.blue
-                                    .withOpacity(0.6), // Blue outline
+                                color: Colors.blue.withOpacity(0.6),
                                 width: 1.5,
                               ),
                               boxShadow: [
@@ -329,7 +322,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Image Section
                                 Expanded(
                                   flex: 5,
                                   child: ClipRRect(
@@ -355,8 +347,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                     ),
                                   ),
                                 ),
-
-                                // Content Section
                                 Expanded(
                                   flex: 2,
                                   child: Padding(
@@ -367,7 +357,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // Title
                                         Text(
                                           anime.title,
                                           maxLines: 2,
@@ -376,12 +365,9 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
-                                            color: Colors
-                                                .white, // White text for contrast
+                                            color: Colors.white,
                                           ),
                                         ),
-
-                                        // Score
                                         Row(
                                           children: [
                                             const Icon(
@@ -395,10 +381,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                               style: const TextStyle(
                                                 fontSize: 12,
                                                 color: Color.fromARGB(
-                                                    255,
-                                                    114,
-                                                    114,
-                                                    114), // Light gray text
+                                                    255, 114, 114, 114),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -416,8 +399,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                     ),
                   ),
                 ),
-
-                // Bottom Padding
                 const SizedBox(height: 16),
               ],
             ),
@@ -538,9 +519,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                         color: Colors.blue,
                         size: 34,
                       ),
-                      onPressed: () {
-                        // Add your user profile navigation logic here
-                      },
+                      onPressed: () {},
                     ),
                   ),
                 ),
@@ -649,9 +628,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                       color: Colors.blue,
                       size: 34,
                     ),
-                    onPressed: () {
-                      // Add your user profile navigation logic here
-                    },
+                    onPressed: () {},
                   ),
                 ),
               ],
@@ -720,9 +697,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                     color: Colors.blue,
                     size: 34,
                   ),
-                  onPressed: () {
-                    // Add your user profile navigation logic here
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],

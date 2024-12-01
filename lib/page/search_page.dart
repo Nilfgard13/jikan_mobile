@@ -196,28 +196,27 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 prefixIcon: Icon(
                   Icons.search,
-                  color: Colors.blue.shade300, // Add blue tint to search icon
+                  color: Colors.blue.shade300,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: Colors.blue.shade400, // Blue border color
-                    width: 1.5, // Slightly thicker border
+                    color: Colors.blue.shade400,
+                    width: 1.5,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color:
-                        Colors.blue.shade300, // Lighter blue when not focused
+                    color: Colors.blue.shade300,
                     width: 1,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                    color: Colors.blue.shade600, // Darker blue when focused
-                    width: 2, // Even thicker when focused
+                    color: Colors.blue.shade600,
+                    width: 2,
                   ),
                 ),
                 filled: true,
@@ -241,7 +240,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-// Main app with bottom navigation
 class AnimeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -322,8 +320,7 @@ class AnimeApp extends StatelessWidget {
             ),
           ),
         ],
-        actionBarView:
-            SearchPage(), // Use the SearchPage as the action bar view
+        actionBarView: SearchPage(),
       ),
     );
   }

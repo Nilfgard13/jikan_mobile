@@ -1,4 +1,3 @@
-// First, update your Episode model (Episode.dart):
 class Episode {
   final int malId;
   final String title;
