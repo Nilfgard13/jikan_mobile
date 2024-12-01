@@ -4,6 +4,7 @@ Projek Mobile Jiikan Anime Apps merupakan sebuah projek yang saya buat untuk mem
 
 ## Getting Started
 
+![My Image](https://github.com/Nilfgard13/jikan_mobile/blob/main/images/my-image.png?raw=true)
 
 A few resources to get you started if this is your first Flutter project:
 
