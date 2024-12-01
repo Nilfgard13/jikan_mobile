@@ -33,7 +33,7 @@ class Anime {
     return Anime(
       malId: json['mal_id'],
       title: json['title'],
-      imageUrl: json['images']['jpg']['image_url'],
+      imageUrl: json['images']['jpg']['large_image_url'],
       synopsis: json['synopsis'] ?? 'No synopsis available',
       score: (json['score'] ?? 0.0).toDouble(),
       type: json['type'] ?? 'Unknown',

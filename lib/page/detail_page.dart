@@ -173,7 +173,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                     SizedBox(width: 12),
                                     Chip(
                                       label: Text(anime.type),
-                                      backgroundColor: secondaryBlue,
+                                      backgroundColor: mainBlue,
                                       labelStyle:
                                           TextStyle(color: Colors.white),
                                     ),
@@ -192,9 +192,9 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                   children: anime.genres
                                       .map((genre) => Chip(
                                             label: Text(genre),
-                                            backgroundColor: mainBlue,
+                                            backgroundColor: const Color.fromARGB(255, 70, 69, 69),
                                             labelStyle:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: const Color.fromARGB(255, 199, 199, 199)),
                                           ))
                                       .toList(),
                                 ),
@@ -212,6 +212,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                             child: Text(
                               anime.synopsis,
                               style: TextStyle(
+                                color: const Color.fromARGB(214, 222, 222, 222),
                                 fontSize: 16,
                                 height: 1.5,
                               ),
@@ -287,7 +288,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                         _buildSectionTitle('Staff'),
                         SizedBox(height: 10),
                         SizedBox(
-                          height: 200,
+                          height: 250,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: staffs.take(6).length,
@@ -298,7 +299,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                                 margin: EdgeInsets.only(
                                     right: 16, left: 16), // Added left margin
                                 child: Container(
-                                  width: 160, // Slightly increased width
+                                  width: 150, // Slightly increased width
                                   padding: EdgeInsets.symmetric(
                                       vertical: 12), // Added overall padding
                                   child: Column(

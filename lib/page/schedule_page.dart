@@ -63,10 +63,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       body: Container(
         child: Column(
           children: [
-            // Safe area for status bar
             SizedBox(height: MediaQuery.of(context).padding.top),
-
-            // Custom Filter Chips
             Container(
               height: 60,
               margin: EdgeInsets.symmetric(vertical: 8),
@@ -78,38 +75,39 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   return Padding(
                     padding: EdgeInsets.only(right: 8),
                     child: AnimatedScale(
-                      scale: _selectedIndex == index ? 1.1 : 1.0,
-                      duration: Duration(milliseconds: 200),
-                      child: FilterChip(
-                        selected: _selectedIndex == index,
-                        label: Text(
-                          _days[index].toUpperCase(),
-                          style: TextStyle(
-                            color: _selectedIndex == index
-                                ? Colors.white
-                                : Colors.grey[300],
-                            fontWeight: _selectedIndex == index
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                        scale: _selectedIndex == index ? 1.1 : 1.0,
+                        duration: Duration(milliseconds: 200),
+                        child: FilterChip(
+                          selected: _selectedIndex == index,
+                          label: Text(
+                            _days[index].toUpperCase(),
+                            style: TextStyle(
+                              color: _selectedIndex == index
+                                  ? Colors.white // Text color when selected
+                                  : Colors.grey[
+                                      400], // Text color when not selected
+                              fontWeight: _selectedIndex == index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
                           ),
-                        ),
-                        onSelected: (bool selected) {
-                          setState(() {
-                            _selectedIndex = index;
-                          });
-                          _fetchSchedule(_days[index]);
-                        },
-                        selectedColor:
-                            Theme.of(context).primaryColor.withOpacity(0.8),
-                        backgroundColor: Colors.black26,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        elevation: _selectedIndex == index ? 4 : 0,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      ),
-                    ),
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _selectedIndex = index;
+                            });
+                            _fetchSchedule(_days[index]);
+                          },
+                          selectedColor:
+                              Colors.blue, // Change to blue when selected
+                          backgroundColor:
+                              Colors.grey[700], // Gray when not selected
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: _selectedIndex == index ? 4 : 0,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                        )),
                   );
                 },
               ),

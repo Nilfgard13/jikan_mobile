@@ -42,25 +42,78 @@ class _AnimeListPageState extends State<AnimeListPage> {
         }
 
         return Container(
-          height: 250,
+          height: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-                child: Row(
-                  children: [
-                    Icon(Icons.recommend,
-                        color: const Color.fromARGB(255, 154, 154, 154)),
-                    SizedBox(width: 8),
-                    Text(
-                      'Recommended Anime',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue.withOpacity(0.5),
+                        Colors.blue.withOpacity(0.2),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
                     ),
-                  ],
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blue.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.blue.withOpacity(0.3),
+                            width: 1.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.blue.withOpacity(0.2),
+                              blurRadius: 4,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.recommend,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Text(
+                        'Recommended Anime',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 0.5,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 2,
+                              offset: Offset(1, 1),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -77,10 +130,8 @@ class _AnimeListPageState extends State<AnimeListPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AnimeDetailPage(
-                                malId: anime
-                                    .malId // Convert to String since malId is defined as String in model
-                                ),
+                            builder: (context) =>
+                                AnimeDetailPage(malId: anime.malId),
                           ),
                         );
                       },
@@ -99,18 +150,15 @@ class _AnimeListPageState extends State<AnimeListPage> {
                         ),
                         child: Stack(
                           children: [
-                            // Image with rounded corners
                             ClipRRect(
                               borderRadius: BorderRadius.circular(16),
                               child: Image.network(
-                                anime.images.jpg
-                                    .largeImageUrl, // Using largeImageUrl instead of imageUrl
+                                anime.images.jpg.largeImageUrl,
                                 height: double.infinity,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            // Dark overlay
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
@@ -124,7 +172,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                 ),
                               ),
                             ),
-                            // Content
                             Positioned(
                               bottom: 0,
                               left: 0,
@@ -141,9 +188,16 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.3,
+                                        height: 1.2,
                                         shadows: [
+                                          Shadow(
+                                            color: Colors.black87,
+                                            offset: Offset(0, 2),
+                                            blurRadius: 4,
+                                          ),
                                           Shadow(
                                             color: Colors.black54,
                                             offset: Offset(0, 1),
@@ -153,14 +207,24 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 8),
-                                    // URL as subtitle (you might want to remove this or replace with other data)
                                     Text(
-                                      anime.url,
-                                      maxLines: 1,
+                                      recommendation.content,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                        color: Colors.white.withOpacity(0.8),
-                                        fontSize: 12,
+                                        color: Colors.white.withOpacity(0.9),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w300,
+                                        letterSpacing: 0.5,
+                                        height: 1.3,
+                                        shadows: [
+                                          Shadow(
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                            offset: Offset(0, 1),
+                                            blurRadius: 2,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -447,7 +511,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               title: Row(
                 children: [
                   Icon(
-                    Icons.live_tv,
+                    Icons.catching_pokemon,
                     color: Colors.blue,
                     size: 28,
                   ),
@@ -468,13 +532,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0),
                   child: Container(
-                    // decoration: BoxDecoration(
-                    //   shape: BoxShape.circle,
-                    //   border: Border.all(
-                    //     color: Colors.blue.withOpacity(0.5),
-                    //     width: 2,
-                    //   ),
-                    // ),
                     child: IconButton(
                       icon: Icon(
                         Icons.account_circle,
@@ -566,7 +623,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               title: Row(
                 children: [
                   Icon(
-                    Icons.live_tv,
+                    Icons.catching_pokemon,
                     color: Colors.blue,
                     size: 28,
                   ),
@@ -637,13 +694,13 @@ class _AnimeListPageState extends State<AnimeListPage> {
             title: Row(
               children: [
                 Icon(
-                  Icons.live_tv,
+                  Icons.catching_pokemon,
                   color: Colors.blue,
                   size: 28,
                 ),
                 SizedBox(width: 12),
                 Text(
-                  'Anime List',
+                  'Anime Search',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
