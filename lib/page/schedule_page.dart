@@ -223,7 +223,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Colors.grey[900]!.withOpacity(0.9),
+                      const Color.fromARGB(255, 78, 78, 78)!.withOpacity(0.9),
                       Colors.grey[850]!.withOpacity(0.9),
                     ],
                   ),
@@ -243,7 +243,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Anime Image
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(16),
