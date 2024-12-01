@@ -57,11 +57,23 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     if (_error.isNotEmpty) {
-      return Center(child: Text(_error, style: TextStyle(color: Colors.red)));
+      return Center(
+        child: Text(
+          _error,
+          style: TextStyle(
+              color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      );
     }
 
     if (_searchResults.isEmpty) {
-      return Center(child: Text('No results found'));
+      return Center(
+        child: Text(
+          'No results found',
+          style: TextStyle(
+              fontSize: 16, color: const Color.fromARGB(210, 97, 96, 96)),
+        ),
+      );
     }
 
     return ListView.builder(
@@ -69,54 +81,97 @@ class _SearchPageState extends State<SearchPage> {
       itemBuilder: (context, index) {
         final anime = _searchResults[index];
         return Card(
+          elevation: 4,
+          shadowColor: const Color.fromARGB(255, 0, 0, 0),
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Image.network(
-                anime.imageUrl,
-                width: 50,
-                height: 75,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    width: 50,
-                    height: 75,
-                    color: Colors.grey[300],
-                    child: Icon(Icons.error),
-                  );
-                },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color.fromARGB(255, 36, 36, 37),
+                  const Color.fromARGB(255, 50, 50, 50)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
+              borderRadius: BorderRadius.circular(12),
             ),
-            title: Text(anime.title),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  anime.synopsis,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+            child: ListTile(
+              contentPadding: EdgeInsets.all(12),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  anime.imageUrl,
+                  width: 60,
+                  height: 90,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 60,
+                      height: 90,
+                      color: const Color.fromARGB(255, 19, 99, 220),
+                      child: Icon(Icons.error, color: Colors.white),
+                    );
+                  },
                 ),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    Icon(Icons.star, size: 16, color: Colors.amber),
-                    SizedBox(width: 4),
-                    Text(anime.score.toString()),
-                    SizedBox(width: 16),
-                    Text('${anime.episodes} episodes'),
-                  ],
+              ),
+              title: Text(
+                anime.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
                 ),
-              ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 4),
+                  Text(
+                    anime.synopsis,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: const Color.fromARGB(255, 136, 143, 147),
+                        fontSize: 14),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.star, size: 16, color: Colors.amber),
+                      SizedBox(width: 4),
+                      Text(
+                        anime.score.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 72, 72, 72)),
+                      ),
+                      SizedBox(width: 16),
+                      Icon(Icons.play_circle_outline,
+                          size: 16, color: Colors.blue),
+                      SizedBox(width: 4),
+                      Text(
+                        '${anime.episodes} episodes',
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 136, 143, 147)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              trailing: Icon(Icons.arrow_forward_ios,
+                  size: 16, color: Colors.blue.shade700),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AnimeDetailPage(malId: anime.malId),
+                  ),
+                );
+              },
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AnimeDetailPage(malId: anime.malId),
-                ),
-              );
-            },
           ),
         );
       },
@@ -126,6 +181,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 51, 51, 51),
       body: Column(
         children: [
           Padding(
@@ -134,12 +190,38 @@ class _SearchPageState extends State<SearchPage> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search anime...',
-                prefixIcon: Icon(Icons.search),
+                hintStyle: TextStyle(
+                  color: const Color.fromARGB(210, 97, 96, 96),
+                  fontSize: 16,
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.blue.shade300, // Add blue tint to search icon
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.blue.shade400, // Blue border color
+                    width: 1.5, // Slightly thicker border
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color:
+                        Colors.blue.shade300, // Lighter blue when not focused
+                    width: 1,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.blue.shade600, // Darker blue when focused
+                    width: 2, // Even thicker when focused
+                  ),
                 ),
                 filled: true,
-                fillColor: Colors.grey[100],
+                fillColor: const Color.fromARGB(255, 61, 59, 59),
               ),
               onSubmitted: _searchAnime,
             ),

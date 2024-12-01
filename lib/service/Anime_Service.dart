@@ -7,6 +7,7 @@ import 'package:jikan/model/Staffs.dart';
 import 'package:jikan/model/Schedule.dart';
 import 'package:jikan/model/Episode.dart';
 import 'package:jikan/model/Episode_detail.dart';
+import 'package:jikan/model/Recommendation.dart';
 
 class AnimeService {
   static Future<List<Anime>> fetchAnimeList() async {
@@ -169,6 +170,24 @@ class AnimeService {
     } catch (e) {
       print('Error fetching episode detail: $e');
       throw Exception('Error fetching episode detail: $e');
+    }
+  }
+
+  static Future<List<AnimeRecommendation>> fetchRecommendations() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://api.jikan.moe/v4/recommendations/anime'),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+        final List<dynamic> data = jsonResponse['data'];
+        return data.map((item) => AnimeRecommendation.fromJson(item)).toList();
+      } else {
+        throw Exception('Failed to load recommendations');
+      }
+    } catch (e) {
+      throw Exception('Error fetching recommendations: $e');
     }
   }
 }
