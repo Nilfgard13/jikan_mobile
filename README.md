@@ -1,10 +1,9 @@
 # jikan
 
-A new Flutter project.
+Projek Mobile Jiikan Anime Apps merupakan sebuah projek yang saya buat untuk memenuhi kebutuhan tugas UAS saya selama menempuh mata kuliah pemrograman mobile. Tujuan dari projek ini adalah untuk menampilkan data anime seeprti my animelist namun dalam bentuk mobile apps yang lebih simple
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
